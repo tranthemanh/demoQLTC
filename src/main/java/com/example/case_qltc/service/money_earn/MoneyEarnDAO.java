@@ -1,8 +1,12 @@
 package com.example.case_qltc.service.money_earn;
 
 import com.example.case_qltc.model.MoneyEarn;
+import com.example.case_qltc.model.MoneySpend;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MoneyEarnDAO {
     public static Connection getConnection() {
@@ -77,4 +81,35 @@ public class MoneyEarnDAO {
             }
         }
     }
+
+    public List<MoneyEarn> getEarningsByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<MoneyEarn> earnings = new ArrayList<>();
+        String query = "SELECT me.id, me.date, me.amount, me.note, ce.name AS category_name, w.walletName AS wallet_name " +
+                "FROM money_earn me " +
+                "JOIN category_earn ce ON me.categoryEarn_id = ce.id " +
+                "JOIN wallet w ON me.wallet_id = w.id " +
+                "WHERE me.date BETWEEN ? AND ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, Date.valueOf(startDate));
+            preparedStatement.setDate(2, Date.valueOf(endDate));
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                MoneyEarn earning = new MoneyEarn();
+                earning.setId(resultSet.getInt("id"));
+                earning.setDate(resultSet.getDate("date").toLocalDate());
+                earning.setAmount(resultSet.getInt("amount"));
+                earning.setNote(resultSet.getString("note"));
+                earning.setCategoryName(resultSet.getString("category_name"));
+                earning.setWalletName(resultSet.getString("wallet_name"));
+                earnings.add(earning);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return earnings;
+    }
+
 }

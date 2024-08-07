@@ -25,9 +25,9 @@
     <div class="container">
         <ul class="header-menu d-flex justify-content-center">
             <li><a href="/categories_earn" class="text-white text-decoration-none">Danh Mục</a></li>
-            <li><a href="/moneyspand" class="text-white text-decoration-none">Thêm khoản chi</a></li>
+            <li><a href="/moneyspend" class="text-white text-decoration-none">Thêm khoản chi</a></li>
             <li><a href="/moneyearn" class="text-white text-decoration-none">Thêm khoản thu</a></li>
-            <li><a href="#" class="text-white text-decoration-none">Quản lý giao dịch</a></li>
+            <li><a href="/report" class="text-white text-decoration-none">Quản lý giao dịch</a></li>
             <li><a href="/wallets" class="text-white text-decoration-none">Ví tiền</a></li>
         </ul>
     </div>

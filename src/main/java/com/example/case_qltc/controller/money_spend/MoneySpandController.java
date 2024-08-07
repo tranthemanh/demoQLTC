@@ -17,9 +17,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet(name = "moneySpandController", value = "/moneyspand")
+@WebServlet(name = "moneySpandController", value = "/moneyspend")
 public class MoneySpandController extends HttpServlet {
-    private static MoneySpendDAO  moneySpendDAO = new MoneySpendDAO();
+    private static MoneySpendDAO moneySpendDAO = new MoneySpendDAO();
     private static CategorySpendDAO categorySpendDAO = new CategorySpendDAO();
     private static WalletDAO walletDAO = new WalletDAO();
 
@@ -29,7 +29,7 @@ public class MoneySpandController extends HttpServlet {
         List<Wallet> wallets = walletDAO.showAll();
         request.setAttribute("categories", categories);
         request.setAttribute("wallets", wallets);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/moneyspand/spand.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/moneyspend/spend.jsp");
         requestDispatcher.forward(request, response);
     }
 
@@ -43,6 +43,6 @@ public class MoneySpandController extends HttpServlet {
         int walletId = Integer.parseInt(request.getParameter("walletId"));
         MoneySpend moneySpend = new MoneySpend(date, amount, note, categoryId, walletId);
         moneySpendDAO.createMonnySpend(moneySpend);
-        response.sendRedirect(request.getContextPath() + "/moneyspand");
+        response.sendRedirect(request.getContextPath() + "/moneyspend");
     }
 }

@@ -3,6 +3,9 @@ package com.example.case_qltc.service.money_spend;
 import com.example.case_qltc.model.MoneySpend;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MoneySpendDAO {
     public static Connection getConnection() {
@@ -76,5 +79,34 @@ public class MoneySpendDAO {
                 }
             }
         }
+    }
+    public List<MoneySpend> getSpendingsByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<MoneySpend> spendings = new ArrayList<>();
+        String query = "SELECT s.id, s.date, s.amount, s.note, c.name AS category_name, w.walletName AS wallet_name " +
+                        "FROM money_spend s " +
+                        "JOIN category_spend c ON s.categorySpend_id = c.id " +
+                        "JOIN wallet w ON s.wallet_id = w.id " +
+                        "WHERE s.date BETWEEN ? AND ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, Date.valueOf(startDate));
+            preparedStatement.setDate(2, Date.valueOf(endDate));
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                MoneySpend spending = new MoneySpend();
+                spending.setId(resultSet.getInt("id"));
+                spending.setDate(resultSet.getDate("date").toLocalDate());
+                spending.setAmount(resultSet.getInt("amount"));
+                spending.setNote(resultSet.getString("note"));
+                spending.setCategoryName(resultSet.getString("category_name"));
+                spending.setWalletName(resultSet.getString("wallet_name"));
+                spendings.add(spending);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return spendings;
     }
 }

@@ -9,8 +9,18 @@ public class MoneySpend {
     private String note;
     private int categoryId;
     private int walletId;
+    private String categoryName;
+    private String walletName;
 
     public MoneySpend() {
+    }
+
+    public MoneySpend(LocalDate date, int amount, String note, String categoryName, String walletName) {
+        this.date = date;
+        this.amount = amount;
+        this.note = note;
+        this.categoryName = categoryName;
+        this.walletName = walletName;
     }
 
     public MoneySpend(LocalDate date, int amount, String note, int categoryId, int walletId) {
@@ -76,5 +86,21 @@ public class MoneySpend {
 
     public void setWalletId(int walletId) {
         this.walletId = walletId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getWalletName() {
+        return walletName;
+    }
+
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
     }
 }
