@@ -26,7 +26,7 @@
     </div>
 </header>
 <div class="container">
-    <h1> Them Danh Muc Thu</h1>
+    <h1> Them Danh Muc Chi</h1>
     <h3><a href="/categories_spend" class="btn btn-secondary"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a></h3>
     <c:out value="${message}"></c:out>
     <form method="post">

@@ -23,8 +23,8 @@
                     Danh Mục
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/categories_earn">Danh mục chi tiêu</a></li>
-                    <li><a class="dropdown-item" href="/categories_spend">Danh mục thu</a></li>
+                    <li><a class="dropdown-item" href="/categories_earn">Danh mục thu</a></li>
+                    <li><a class="dropdown-item" href="/categories_spend">Danh mục chi</a></li>
                 </ul>
             </li>
             <li><a href="/moneyspend" class="text-white text-decoration-none">Thêm khoản chi</a></li>
@@ -38,7 +38,7 @@
 
 <div class="container content">
     <div class="mb-3">
-        <a href="categories_earn?action=create" class="btn btn-primary">
+        <a href="/categories_earn?action=create" class="btn btn-primary">
             <i class="fa fa-plus"></i> Thêm danh mục
         </a>
     </div>

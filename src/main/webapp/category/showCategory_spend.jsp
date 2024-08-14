@@ -18,7 +18,7 @@
     <div class="container">
         <ul class="header-menu d-flex justify-content-center">
             <li><a href="/categories_earn" class="text-white text-decoration-none">Danh Mục</a> </li>
-            <li><a href="moneyspend" class="text-white text-decoration-none">Thêm khoản chi</a></li>
+            <li><a href="/moneyspend" class="text-white text-decoration-none">Thêm khoản chi</a></li>
             <li><a href="/moneyearn" class="text-white text-decoration-none">Thêm khoản thu</a></li>
             <li><a href="/report" class="text-white text-decoration-none">Quản lý giao dịch</a></li>
             <li><a href="/wallets" class="text-white text-decoration-none">Ví tiền</a></li>
@@ -29,15 +29,15 @@
 <!-- Main Content -->
 <div class="container content">
     <div class="mb-3">
-        <a href="categories_earn?action=create" class="btn btn-primary">
+        <a href="/categories_spend?action=create" class="btn btn-primary">
             <i class="fa fa-plus"></i> Thêm danh mục
         </a>
     </div>
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Action</th>
+            <th>Tên danh mục</th>
+            <th>Hành động</th>
         </tr>
         </thead>
         <tbody>
