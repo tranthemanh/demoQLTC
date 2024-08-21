@@ -31,7 +31,7 @@ public class CategoryEarnDao implements ICategory {
     @Override
     public List<Category> getAllCategory() {
         List<Category> category_earn = new ArrayList<>();
-        String selectAll = "SELECT * FROM category_earn ORDER BY id DESC";
+        String selectAll = "SELECT * FROM category_earn WHERE is_deleted = false ORDER BY id DESC";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(selectAll)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -103,7 +103,7 @@ public class CategoryEarnDao implements ICategory {
     @Override
     public boolean deleteCategory(int id) {
             boolean rowDelete;
-            String deleteCategory_earn="delete from category_earn where id=?;";
+            String deleteCategory_earn="UPDATE category_earn SET is_deleted = true WHERE id=?";
             try(Connection connection= getConnection(); PreparedStatement preparedStatement= connection.prepareStatement(deleteCategory_earn)) {
                 preparedStatement.setInt(1,id);
                 rowDelete=preparedStatement.executeUpdate()>0;

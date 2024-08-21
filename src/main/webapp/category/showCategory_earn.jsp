@@ -57,6 +57,9 @@
                     <a href="/categories_earn?action=edit&id=${category_earn.id}" class="btn btn-warning btn-sm">
                         <i class="fa fa-pencil" aria-hidden="true"></i> Sửa
                     </a>
+                    <a href="/categories_earn?action=delete&id=${category_earn.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                    </a>
                 </td>
             </tr>
         </c:forEach>

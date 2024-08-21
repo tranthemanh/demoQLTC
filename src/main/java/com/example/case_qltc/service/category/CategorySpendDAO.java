@@ -31,7 +31,7 @@ public class CategorySpendDAO implements ICategory{
     @Override
     public List<Category> getAllCategory() {
         List<Category> categories_spend = new ArrayList<>();
-        String selectAllCategory_spend = "SELECT * FROM category_spend ORDER BY id DESC";
+        String selectAllCategory_spend = "SELECT * FROM category_spend WHERE is_deleted = false ORDER BY id DESC";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(selectAllCategory_spend)) {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -103,7 +103,7 @@ public class CategorySpendDAO implements ICategory{
     @Override
     public boolean deleteCategory(int id) {
         boolean rowDelete;
-        String deleteCategory_spend="delete from category_spend where id=?;";
+        String deleteCategory_spend="UPDATE category_spend SET is_deleted = true WHERE id=?";
         try(Connection connection= getConnection(); PreparedStatement preparedStatement= connection.prepareStatement(deleteCategory_spend)) {
             preparedStatement.setInt(1,id);
              rowDelete=preparedStatement.executeUpdate()>0;

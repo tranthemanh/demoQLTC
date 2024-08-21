@@ -45,20 +45,27 @@ public class CategoryEarnService extends HttpServlet {
 
     }
 
-    private void DeleteCategory_earn(HttpServletRequest req, HttpServletResponse resp) {
-        int id_Category_earn= Integer.parseInt(req.getParameter("id"));
-        category_earn_Dao.deleteCategory(id_Category_earn);
+    private void DeleteCategory_earn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id_Category_earn = Integer.parseInt(req.getParameter("id"));
+
+        boolean isDeleted = category_earn_Dao.deleteCategory(id_Category_earn);
 
         List<Category> categories_earn = category_earn_Dao.getAllCategory();
-        req.setAttribute("categories_earn",categories_earn);
+        req.setAttribute("categories_earn", categories_earn);
+
+        if (isDeleted) {
+            req.setAttribute("message", "Xóa danh mục thành công!");
+        } else {
+            req.setAttribute("message", "Xóa danh mục không thành công. Danh mục có liên kết với khoản thu hoặc chi.");
+        }
+
         try {
-            req.getRequestDispatcher("/category/showCategory_earn.jsp").forward(req,resp);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            req.getRequestDispatcher("/category/showCategory_earn.jsp").forward(req, resp);
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private void showFormUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         CategoryEarnDao category_earn_DAO = new CategoryEarnDao();
